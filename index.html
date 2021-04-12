@@ -24,10 +24,16 @@
             let change = 0;
 
             let Ans = [];
+            
             abc = document.getElementById('data').value;
+
+            if(abc== ""){
+                alert("未正確輸入");
+                return ;
+            }
             abc = abc.split("\n");
 
-          
+            
             for(i=0 ; i<abc.length;i++){
                 if(abc[i]== "一戶通"){
                     abc = abc.slice(i+6);
@@ -115,13 +121,9 @@
 
 
                 for (let j = 0; j < 金額.length; j++) {
-                    console.log(金額輸出);
                     金額輸出 = 金額輸出 + 金額[j];
-                    console.log(金額輸出);
-                    console.log(金額[j]);
                 }
 
-                console.log(金額輸出)
                 lastname[i].push(金額輸出);
 
                 現股買進 = [] ;
