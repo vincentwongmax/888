@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <textarea id="data" rows="4" cols="50"></textarea>
+    <button id= "gogogo" onclick="getData()">提交</button>
+    <button onclick="letitOutPut()">輸出結果</button>
+
+    <script>
+        var datamain = [];
+
+        function getData() {
+            document.getElementById("gogogo").innerHTML = "繼續提交" ;
+            let abc = '';
+            let Step0 = [];
+            let ppush = [];
+            let change = 0;
+
+            let Ans = [];
+            abc = document.getElementById('data').value;
+            abc = abc.split("\n");
+
+          
+            for(i=0 ; i<abc.length;i++){
+                if(abc[i]== "一戶通"){
+                    abc = abc.slice(i+6);
+                }
+            }
+
+            for(i=0 ; i<abc.length;i++){
+                if(abc[i] == '注意事項'){
+                    abc = abc.slice(0,i-1);
+                }
+            }
+
+
+            console.log(abc);
+            for (i = 0; i < abc.length; i++) {
+                datamain.push(abc[i].split('	'));
+            }
+
+            if(datamain[datamain.length - 1 ] == ""){
+             datamain.pop();
+            }
+
+            document.getElementById('data').value = '';
+            console.log(datamain);
+        }
+        //
+        function letitOutPut() {
+            let tradename = [];
+            let lastname = [];
+            let 現股買進 = [] ;
+            let 現股賣出 = [] ;
+            let 金額 = []; 
+            let 金額輸出 = 0; 
+
+
+            for (i = 0; i < datamain.length; i++) {
+                tradename.push(datamain[i][0]);
+            }
+            tradename = tradename.filter((el, i, arr) => arr.indexOf(el) === i);
+
+
+            for (i = 0; i < tradename.length; i++) {
+                lastname[i] = [];
+
+                for (j = 0; j < datamain.length; j++) {
+                    if (tradename[i] == datamain[j][0]) {
+                        if (lastname[i][0] !== datamain[j][0]) {
+                            lastname[i].push(datamain[j][0]);
+                        }
+
+                        if(datamain[j][2] == '現股買進' || datamain[j][2] == '現沖買進'){
+                            現股買進.push(" ");
+                            現股買進.push(datamain[j][4]);
+                            現股買進.push(" ");
+                            現股買進.push(datamain[j][5]);
+                            現股買進.push(",");
+                        }
+
+                        if(datamain[j][2] == '現股賣出' || datamain[j][2] == '現沖賣出' ){
+                            現股賣出.push(" ");
+                            現股賣出.push(datamain[j][4]);
+                            現股賣出.push(" ");
+                            現股賣出.push(datamain[j][5]);
+                            現股賣出.push(",");
+                        }
+                    
+                        金額.push(parseInt(datamain[j][9].split(",").join("")))
+                    }
+                }
+                
+
+                現股買進.splice(0, 0, '買(');
+                if(現股買進[現股買進.length - 1] == ','){
+                    現股買進.pop();
+                }
+                現股買進.splice(現股買進.length , 0, ')');
+                lastname[i].push(現股買進.join(''));
+
+                現股賣出.splice(0, 0, '賣(');
+                if(現股賣出[現股賣出.length - 1] == ','){
+                    現股賣出.pop();
+                }
+                現股賣出.splice(現股賣出.length  , 0, ')');
+                lastname[i].push(現股賣出.join(''));
+
+
+                for (let j = 0; j < 金額.length; j++) {
+                    console.log(金額輸出);
+                    金額輸出 = 金額輸出 + 金額[j];
+                    console.log(金額輸出);
+                    console.log(金額[j]);
+                }
+
+                console.log(金額輸出)
+                lastname[i].push(金額輸出);
+
+                現股買進 = [] ;
+                現股賣出 = [] ;
+                金額= [] ;
+                金額輸出 = 0 ;
+            }
+            
+            for(i=0 ; i<lastname.length ; i++ ){
+             console.log(lastname[i].join(' '));
+            }
+        }
+    </script>
+
+</body>
+
+</html>
