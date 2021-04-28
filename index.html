@@ -12,6 +12,7 @@
     <textarea id="data" rows="4" cols="50"></textarea>
     <button id= "gogogo" onclick="getData()">提交</button>
     <button onclick="letitOutPut()">輸出結果</button>
+    <a id="ANS"></a>
 
     <script>
         var datamain = [];
@@ -132,8 +133,14 @@
                 金額輸出 = 0 ;
             }
             
+            document.getElementById('ANS').innerHTML = '';
+            document.getElementById('ANS').innerHTML += "<br>" ;
+            document.getElementById('ANS').innerHTML += "<br>" ;
+
             for(i=0 ; i<lastname.length ; i++ ){
-             console.log(lastname[i].join(' '));
+              console.log(lastname[i].join(' '));
+              document.getElementById('ANS').innerHTML += lastname[i].join(' ');
+              document.getElementById('ANS').innerHTML += "<br>" ;
             }
         }
     </script>
