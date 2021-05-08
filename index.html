@@ -12,6 +12,7 @@
     <textarea id="data" rows="4" cols="50"></textarea>
     <button id= "gogogo" onclick="getData()">提交</button>
     <button onclick="letitOutPut()">輸出結果</button>
+    <input type="checkbox" id="showdate">顯示日期<br>
     <a id="ANS"></a>
 
     <script>
@@ -69,7 +70,6 @@
             let 金額 = []; 
             let 金額輸出 = 0; 
 
-
             for (i = 0; i < datamain.length; i++) {
                 tradename.push(datamain[i][0]);
             }
@@ -90,6 +90,10 @@
                             現股買進.push(datamain[j][4]);
                             現股買進.push(" ");
                             現股買進.push(datamain[j][5]);
+                            if(document.getElementById('showdate').checked == true){
+                                現股買進.push(" ");
+                                現股買進.push(datamain[j][1]);
+                            }
                             現股買進.push(",");
                         }
 
@@ -98,6 +102,10 @@
                             現股賣出.push(datamain[j][4]);
                             現股賣出.push(" ");
                             現股賣出.push(datamain[j][5]);
+                            if(document.getElementById('showdate').checked == true){
+                                現股賣出.push(" ");
+                                現股賣出.push(datamain[j][1]);
+                            }
                             現股賣出.push(",");
                         }
                     
